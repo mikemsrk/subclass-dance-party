@@ -1,5 +1,6 @@
 $(document).ready(function(){
   window.dancers = [];
+  var oldpositions = [];
 
   $(".addDancerButton").on("click", function(event){
     /* This function sets up the click handlers for the create-dancer
@@ -29,12 +30,53 @@ $(document).ready(function(){
     );
     $('body').append(dancer.$node);
     window.dancers.push(dancer);
+    oldpositions.push([dancer.top, dancer.left]);
   });
 
+
+  var linedup = false;
+
   $(".lineUpButton").on("click", function(event){
-    for (var i = 0; i < window.dancers.length; i++){
-      window.dancers[i].setPosition(window.innerHeight/2,100+i*50);
+    if (linedup){
+      for (var i=0; i<window.dancers.length; i++){
+        window.dancers[i].setPosition(oldpositions[i][0], oldpositions[i][1]);
+      }
+      linedup = false;
+    } else {
+      for (var i = 0; i < window.dancers.length; i++){
+        window.dancers[i].setPosition(window.innerHeight/2,100+i*50);
+      }
+      linedup = true;
     }
   });
+
+  $("body").on('mouseenter','.slowD',function(){
+    $(this).fadeOut();
+  });
+
+  var colliderCheck = function(){
+    // iterate each one
+    for(var i=0;i<window.dancers.length;i++){
+      //check for any close ones
+      var node = window.dancers[i];
+      //look thru other nodes
+      for(var j=0;j < window.dancers.length;j++){
+        var other = window.dancers[j];
+
+        //if close
+        if(other && j !== i){
+          if(Math.abs(node.top - other.top) < 200 || Math.abs(node.left - other.left) < 200){
+        }
+        // move around
+          node.setPosition(node.top-100,node.left-100);
+          other.setPosition(other.top+100,other.left+100);
+        }
+      }
+    }
+  };
+
+  setInterval(colliderCheck,500);
+
+
 });
 
