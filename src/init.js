@@ -55,27 +55,35 @@ $(document).ready(function(){
   });
 
   var colliderCheck = function(){
-    // iterate each one
-    for(var i=0;i<window.dancers.length;i++){
-      //check for any close ones
-      var node = window.dancers[i];
-      //look thru other nodes
-      for(var j=0;j < window.dancers.length;j++){
-        var other = window.dancers[j];
 
-        //if close
-        if(other && j !== i){
-          if(Math.abs(node.top - other.top) < 200 || Math.abs(node.left - other.left) < 200){
-        }
-        // move around
-          node.setPosition(node.top-100,node.left-100);
-          other.setPosition(other.top+100,other.left+100);
+    if(!linedup){
+      // iterate each one
+      for(var i=0;i<window.dancers.length;i++){
+        //check for any close ones
+        var node = window.dancers[i];
+        //look thru other nodes
+        for(var j=0;j < window.dancers.length;j++){
+          var other = window.dancers[j];
+
+          if(other && j !== i){
+          //if close
+            if(Math.abs(node.top - other.top) < 30 || Math.abs(node.left - other.left) < 30){
+              // // move around
+              // node.$node.css({border: "10px solid black"});
+              var y = Math.random()*30;
+              var x = Math.random()*30;
+              node.setPosition(node.top-y,node.left-x);
+              other.setPosition(other.top+y,other.left+x);
+            }
+          }
         }
       }
     }
   };
 
-  setInterval(colliderCheck,500);
+  //$(".collision").on('click',colliderCheck);
+
+  setInterval(colliderCheck,100);
 
 
 });
