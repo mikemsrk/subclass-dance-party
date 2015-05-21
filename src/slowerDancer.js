@@ -6,7 +6,6 @@ SlowerDancer.prototype = Object.create(SlowDancer.prototype);
 
 SlowerDancer.prototype.step = function(){
 
-  this.oldStep(this.timeBetweenSteps);
-
+  Dancer.prototype.step.call(this);
   this.$node.toggleClass('newDance');
 };
