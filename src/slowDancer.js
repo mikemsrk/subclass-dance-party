@@ -1,7 +1,7 @@
 var SlowDancer = function(top, left, timeBetweenSteps){
 
   //var blinkyDancer = makeDancer(top, left, timeBetweenSteps);
-
+  debugger;
   Dancer.call(this);
 
   this.$node.removeClass('dancer');
