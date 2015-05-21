@@ -39,23 +39,21 @@ $(document).ready(function(){
   $(".lineUpButton").on("click", function(event){
     if (linedup){
       for (var i=0; i<window.dancers.length; i++){
-        window.dancers[i].setPosition(oldpositions[i][0], oldpositions[i][1]);
+        window.dancers[i].$node.animate({top:oldpositions[i][0],left:oldpositions[i][1]});
+        //window.dancers[i].setPosition(oldpositions[i][0], oldpositions[i][1]);
       }
       linedup = false;
     } else {
       for (var i = 0; i < window.dancers.length; i++){
-        window.dancers[i].setPosition(window.innerHeight/2,100+i*50);
+        window.dancers[i].$node.animate({top:window.innerHeight/2,left:100+i*50});
+        //window.dancers[i].setPosition(window.innerHeight/2,100+i*50);
+
       }
       linedup = true;
     }
   });
 
-  $("body").on('mouseenter','.slowD',function(){
-    $(this).fadeOut();
-  });
-
   var colliderCheck = function(){
-
     if(!linedup){
       // iterate each one
       for(var i=0;i<window.dancers.length;i++){
@@ -70,8 +68,10 @@ $(document).ready(function(){
             if(Math.abs(node.top - other.top) < 30 || Math.abs(node.left - other.left) < 30){
               // // move around
               // node.$node.css({border: "10px solid black"});
-              var y = Math.random()*30;
-              var x = Math.random()*30;
+              var y = Math.random()*3;
+              var x = Math.random()*3;
+              //node.$node.animate({left:node.left-x,top:node.top-y});
+              //other.$node.animate({left:other.left+x,top:other.top+y});
               node.setPosition(node.top-y,node.left-x);
               other.setPosition(other.top+y,other.left+x);
             }
@@ -83,7 +83,7 @@ $(document).ready(function(){
 
   //$(".collision").on('click',colliderCheck);
 
-  setInterval(colliderCheck,100);
+  setInterval(colliderCheck,50);
 
 
 });

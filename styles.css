@@ -25,15 +25,29 @@ body, a:link, a:visited, a:active{
   border:10px solid red;
   border-radius:10px;
   position:absolute;
+  transition: border-size 2s, border-color 2s, transform 2s;
 }
+
 .slowD{
   border:25px solid blue;
   border-radius:10px;
   position:absolute;
+  transition: border-size 2s, border-color 2s, transform 2s;
+}
+
+.slowD:hover{
+  transform:rotate(180deg);
+  border-color: #FFCCCC;
+  border-size:45px;
 }
 
 .fastD{
   border:8px solid green;
   border-radius:5px;
   position:absolute;
+  transition: border-size 2s, border-color 2s, transform 2s;
+}
+
+.dancing{
+  transform:scale(3,3);
 }
